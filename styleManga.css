@@ -1,0 +1,223 @@
+/* Пункт 15: Добавление изображения на фон */
+body {
+  background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+  /* Замените URL на любое другое изображение по желанию */
+  background-color: #000000;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Пункт 2: Темный фон калькулятора (базовая тема) + Пункт 10: Выравнивание по центру */
+.calculator-container {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #2d2d2d; /* Темный фон калькулятора */
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Пункт 1: Новая цветовая палитра (вместо оранжево-серой) */
+/* Пункт 3: Квадратные кнопки вместо круглых */
+.my-btn { 
+  margin-right: 5px;
+  margin-top: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px; /* Квадратные с небольшим скруглением вместо 50% */
+  border: none;
+  background: #4a6fa5; /* Новый цвет - синеватый вместо серого */
+  color: #ffffff; /* Пункт 14: Цвет шрифта (белый) */
+  font-size: 1.5rem;
+  /* Пункт 6: Новый шрифт цифр + Пункт 13: Шрифт тоньше */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 300; /* Тонкий шрифт */
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+} 
+
+/* Пункт 8: Новый цвет при наведении мышки */
+.my-btn:hover {
+  background: #6b8ec9; /* Светло-синий вместо darkgray */
+}
+
+.my-btn:active {
+  filter: brightness(130%);
+}
+
+/* Пункт 1: Новая цветовая палитра для первичных операций */
+.my-btn.primary { 
+  background: #2c3e50; /* Темно-синий вместо оранжевого */
+}
+
+/* Пункт 1: Новая цветовая палитра для вторичных операций */
+.my-btn.secondary { 
+  background: #95a5a6; /* Зеленовато-серый вместо серого */
+}
+
+/* Кнопка равно */
+.my-btn.execute { 
+  width: 110px;
+  border-radius: 8px; /* Квадратная форма */
+}
+
+/* Пункт 4: Измененный цвет вывода результата (бирюзовый фон) */
+/* Пункт 5: Скругленные края у окна вывода */
+/* Пункт 11: Увеличенный размер окна вывода */
+.result { 
+  width: 240px; /* Увеличено с 220px */
+  height: 60px; /* Увеличено с 50px */
+  margin-bottom: 15px;
+  padding-right: 10px;
+  background: #1abc9c; /* Бирюзовый фон вместо серого */
+  border-radius: 15px; /* Скругленные края */
+  text-align: right;
+  color: #2c3e50; /* Пункт 14: Темно-синий цвет шрифта */
+  font-size: 2rem; /* Увеличен размер шрифта */
+  /* Пункт 6 и 7: Новый шрифт и жирность */
+  font-family: 'Roboto', 'Arial Black', sans-serif;
+  font-weight: 700; /* Жирный шрифт */
+  line-height: 60px; /* Для вертикального выравнивания */
+  overflow: hidden;
+}
+
+/* Пункт 9: Стили для надписи внизу */
+.footer-note {
+  text-align: center;
+  margin-top: 20px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Пункт 12: Стили для кнопки смены темы */
+.theme-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.theme-btn:hover {
+  background: #2980b9;
+}
+
+/* Темная тема (переключается по клику) */
+.dark-theme .calculator-container {
+  background-color: #1a1a1a;
+}
+
+.dark-theme .my-btn {
+  background: #34495e;
+}
+
+.dark-theme .my-btn.primary {
+  background: #e67e22;
+}
+
+.dark-theme .my-btn.secondary {
+  background: #7f8c8d;
+}
+
+.dark-theme .result {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+/* Пункт 16: Кнопка GitHub */
+.github-link {
+  text-decoration: none;
+  display: block;
+  margin-top: 15px;
+}
+
+.github-btn {
+  width: 100% !important;
+  background: #24292e !important;
+}
+
+.github-btn:hover {
+  background: #2c3e50 !important;
+}
+
+/* Пункт 17: Стили для выпадающего списка */
+.dropdown-container {
+  margin-top: 15px;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-top: 5px;
+  background: white;
+}
+
+/* Пункт 18: Стили для сворачивающихся подробностей */
+.author-details {
+  margin-top: 15px;
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.author-details summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #3498db;
+}
+
+.author-details p {
+  margin: 5px 0;
+  color: #ddd;
+}
+
+/* Пункт 19: Подсветка слов в цели ЛР */
+.lab-purpose {
+  color: white;
+  font-family: Arial, sans-serif;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #ff7300;
+}
+
+.highlight-word {
+  background-color: #e74c3c;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+/* Пункт 20: Уникальный стиль - добавляем тени и градиенты */
+.calculator {
+  background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 20px 30px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.1);
+}
+
+/* Дополнительный уникальный элемент - неоновое свечение при фокусе */
+.my-btn:focus {
+  outline: none;
+  box-shadow: 0 0 10px #3498db;
+}
