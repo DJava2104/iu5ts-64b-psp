@@ -1,0 +1,548 @@
+/* ========== ОБЩИЕ СТИЛИ ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== НАВИГАЦИОННОЕ МЕНЮ ========== */
+.navbar {
+  background: linear-gradient(135deg, #212529 50%, #ff9100 100%);
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav-logo svg {
+  fill: white;
+}
+
+/* Логотип */
+.headerLogo__logo {
+  height: 80px; /* Увеличен логотип */
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(255, 77, 77, 0.3));
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.nav-link.active {
+  background: rgba(255,255,255,0.3);
+  font-weight: bold;
+}
+
+/* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+.main-content {
+  flex: 1;
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========== КАРТОЧКИ НА ГЛАВНОЙ ========== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.card {
+  background: #212529;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.card-text {
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.card-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background: #ff9100;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.card-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* ========== ПРОФИЛЬ НА СТРАНИЦЕ ABOUT ========== */
+.profile-card {
+  background: #212529;
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #ff9100;
+}
+
+.profile-info h2 {
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.profile-group {
+  color: #ff9100 ;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.profile-bio {
+  color: #ffffff;
+  line-height: 1.8;
+}
+
+/* ========== ДЕТАЛИ (СВОРАЧИВАЮЩИЕСЯ) ========== */
+.details-section {
+  margin-bottom: 40px;
+}
+
+.about-details {
+  background: #212529;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.about-details summary {
+  padding: 15px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+  list-style: none;
+  position: relative;
+}
+
+.about-details summary::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  color: #ff9100 ;
+  transition: transform 0.3s ease;
+}
+
+.about-details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.details-content {
+  padding: 0 20px 20px 35px;
+  color: #ffffff;
+}
+
+.details-content ul {
+  margin-left: 20px;
+}
+
+/* ========== КОНТАКТЫ ========== */
+.contact-section {
+  background: #212529;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.contact-section h2 {
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+}
+
+.contact-icon {
+  font-size: 1.5rem;
+}
+
+/* ========== КНОПКА ВОЗВРАТА ========== */
+.back-to-home {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 30px;
+  background: #ff9100;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+  background: #764ba2;
+  transform: scale(1.05);
+}
+
+/* ========== КАЛЬКУЛЯТОР ========== */
+.calculator-page {
+  display: flex;
+  justify-content: center;
+}
+
+.calculator-container {
+  max-width: 350px;
+  width: 100%;
+  background: #2d2d2d;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* Пункт 1: Новая цветовая палитра */
+.my-btn { 
+  margin: 5px;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px; /* Пункт 3: Квадратные кнопки */
+  border: none;
+  background: #4a6fa5;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 300; /* Пункт 13: Тонкий шрифт */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Пункт 8: Новый цвет при наведении */
+.my-btn:hover {
+  background: #6b8ec9;
+  transform: scale(1.05);
+}
+
+.my-btn:active {
+  filter: brightness(130%);
+  transform: scale(0.95);
+}
+
+.my-btn.primary { 
+  background: #2c3e50;
+}
+
+.my-btn.secondary { 
+  background: #95a5a6;
+}
+
+.my-btn.execute { 
+  width: 130px;
+}
+
+/* Пункт 4,5,11: Результат */
+.result { 
+  width: 100%;
+  height: 70px;
+  margin-bottom: 20px;
+  padding: 0 15px;
+  background: #1abc9c;
+  border-radius: 15px;
+  text-align: right;
+  color: #2c3e50;
+  font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  line-height: 70px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.buttons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* Пункт 12: Кнопка темы */
+.theme-btn {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+  background: #2980b9;
+}
+
+/* Темная тема */
+.dark-theme .calculator-container {
+  background-color: #1a1a1a;
+}
+
+.dark-theme .my-btn {
+  background: #34495e;
+}
+
+.dark-theme .my-btn.primary {
+  background: #e67e22;
+}
+
+.dark-theme .my-btn.secondary {
+  background: #7f8c8d;
+}
+
+.dark-theme .result {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+/* Пункт 16: Кнопка GitHub */
+.github-link {
+  text-decoration: none;
+  display: block;
+  margin-top: 15px;
+}
+
+.github-btn {
+  width: 100% !important;
+  background: #212529 !important;
+  color: white !important;
+}
+
+.github-btn:hover {
+  background: #ff9100  !important;
+  color: white !important;
+}
+
+/* Пункт 17: Выпадающий список */
+.dropdown-container {
+  margin: 20px 0;
+  color: white;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-top: 5px;
+}
+
+/* Пункт 18: Детали автора */
+.author-details {
+  margin: 20px 0;
+  background: rgba(255,255,255,0.1);
+  padding: 15px;
+  border-radius: 8px;
+  color: white;
+}
+
+.author-details summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #3498db;
+}
+
+.author-details p {
+  margin: 10px 0;
+  color: #ddd;
+}
+
+/* Пункт 19: Подсветка слов */
+.lab-purpose {
+  color: white;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #f1c40f;
+}
+
+.highlight-word {
+  background-color: #e74c3c;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-weight: bold;
+  margin: 0 3px;
+}
+
+/* Пункт 9: Футер */
+.footer {
+  background: #212529;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 20px 0;
+  margin-top: auto;
+}
+
+/* Информационная секция */
+.info-section {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.info-section h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.info-details {
+  margin-top: 20px;
+}
+
+.info-details summary {
+  cursor: pointer;
+  color: #667eea;
+  font-weight: bold;
+}
+
+.info-details ul {
+  margin: 15px 0 0 20px;
+  color: #666;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .card {
+    margin: 0 10px;
+  }
+  
+  .my-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .my-btn.execute {
+    width: 110px;
+  }
+}

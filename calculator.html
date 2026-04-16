@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Навигационное меню -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+            <img class="headerLogo__logo" src="DJavakhirDJon.png" alt="DJavakhirDJon">
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a href="calculator.html" class="nav-link active">Калькулятор</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">Обо мне</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container calculator-page">
+            <!-- Пункт 10: Выравнивание по центру -->
+            <div class="calculator-container">
+                <div class="calculator">
+                    <!-- Пункт 4,5,11: Измененный результат -->
+                    <div id="result" class="result">0</div>
+
+                    <!-- Кнопки калькулятора -->
+                    <div class="buttons-grid">
+                        <div class="button-row">
+                            <button id="btn_op_clear" class="my-btn secondary">C</button>
+                            <button id="btn_op_backspace" class="my-btn secondary">←</button>
+                            <button id="btn_op_sqrt" class="my-btn secondary">√</button>
+                            <button id="btn_op_square" class="my-btn secondary">x²</button>
+                            <button id="btn_op_div" class="my-btn primary">/</button>
+                        </div>
+                        <div class="button-row">
+                            <button id="btn_op_percent" class="my-btn secondary">%</button>
+                            <button id="btn_op_factorial" class="my-btn secondary">x!</button>
+                            <button id="btn_op_mem_add" class="my-btn secondary">M+</button>
+                            <button id="btn_op_mem_sub" class="my-btn secondary">M-</button>
+                            <button id="btn_op_mult" class="my-btn primary">x</button>
+                        </div>
+                        <div class="button-row">
+                            <button id="btn_digit_7" class="my-btn">7</button>
+                            <button id="btn_digit_8" class="my-btn">8</button>
+                            <button id="btn_digit_9" class="my-btn">9</button>
+                            <button id="btn_digit_000" class="my-btn">000</button>
+                            <button id="btn_op_minus" class="my-btn primary">-</button>
+                        </div>
+                        <div class="button-row">
+                            <button id="btn_digit_4" class="my-btn">4</button>
+                            <button id="btn_digit_5" class="my-btn">5</button>
+                            <button id="btn_digit_6" class="my-btn">6</button>
+                            <button id="btn_op_plus" class="my-btn primary">+</button>
+                        </div>
+                        <div class="button-row">
+                            <button id="btn_digit_1" class="my-btn">1</button>
+                            <button id="btn_digit_2" class="my-btn">2</button>
+                            <button id="btn_digit_3" class="my-btn">3</button>
+                            <button id="btn_op_equal" class="my-btn primary execute">=</button>
+                        </div>
+                        <div class="button-row">
+                            <button id="btn_digit_0" class="my-btn">0</button>
+                            <button id="btn_digit_dot" class="my-btn">.</button>
+                            <button id="btn_op_cube" class="my-btn secondary">x³</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Пункт 18: Сворачивающиеся подробности -->
+                <details class="author-details">
+                    <summary>👤 Автор</summary>
+                    <p>ФИО: Тошниёзов Жавохирбек Голибжон угли</p>
+                    <p>Группа: ИУ5Ц-64Б</p>
+                </details>
+            </div>
+        </div>
+    </main>
+
+    <!-- Пункт 9: Надпись внизу -->
+    <footer class="footer">
+        <p>ЛР выполнена Тошниёзов Ж.Г. | Группа ИУ5Ц-64Б | 2026</p>
+    </footer>
+
+    <script>
+const resultDisplay = document.getElementById('result');
+
+let currentValue = '0';
+let previousValue = '';
+let operation = null;
+let shouldResetScreen = false;
+let memoryValue = 0;
+function updateDisplay() {
+    resultDisplay.textContent = currentValue;
+}
+
+function appendNumber(number) {
+    if (currentValue === '0' || shouldResetScreen) {
+        currentValue = number;
+        shouldResetScreen = false;
+    } else {
+        currentValue += number;
+    }
+    updateDisplay();
+}
+
+function appendThreeZeros() {
+    if (currentValue === '0' || shouldResetScreen) {
+        currentValue = '000';
+        shouldResetScreen = false;
+    } else {
+        currentValue += '000';
+    }
+    updateDisplay();
+}
+
+function appendDot() {
+    if (shouldResetScreen) {
+        currentValue = '0.';
+        shouldResetScreen = false;
+        updateDisplay();
+        return;
+    }
+    
+    if (!currentValue.includes('.')) {
+        currentValue += '.';
+        updateDisplay();
+    }
+}
+
+function clearScreen() {
+    currentValue = '0';
+    previousValue = '';
+    operation = null;
+    updateDisplay();
+}
+
+function changeSign() {
+    currentValue = (parseFloat(currentValue) * -1).toString();
+    updateDisplay();
+}
+
+function backspace() {
+    if (currentValue.length > 1) {
+        currentValue = currentValue.slice(0, -1);
+    } else {
+        currentValue = '0';
+    }
+    updateDisplay();
+}
+
+function percent() {
+    currentValue = (parseFloat(currentValue) / 100).toString();
+    updateDisplay();
+}
+
+function sqrt() {
+    const val = parseFloat(currentValue);
+    if (val < 0) {
+        alert('Нельзя извлечь корень из отрицательного числа!');
+        return;
+    }
+    currentValue = Math.sqrt(val).toString();
+    shouldResetScreen = true;
+    updateDisplay();
+}
+
+function square() {
+    const val = parseFloat(currentValue);
+    currentValue = (val * val).toString();
+    shouldResetScreen = true;
+    updateDisplay();
+}
+
+function cube() {
+    const val = parseFloat(currentValue);
+    currentValue = (val * val * val).toString();
+    shouldResetScreen = true;
+    updateDisplay();
+}
+
+function factorial() {
+    const val = parseFloat(currentValue);
+    if (val < 0 || !Number.isInteger(val)) {
+        alert('Факториал только для целых неотрицательных чисел!');
+        return;
+    }
+    let result = 1;
+    for (let i = 2; i <= val; i++) {
+        result *= i;
+    }
+    currentValue = result.toString();
+    shouldResetScreen = true;
+    updateDisplay();
+}
+
+function memAdd() {
+    memoryValue += parseFloat(currentValue);
+    currentValue = '0';
+    shouldResetScreen = true;
+    updateDisplay();
+}
+
+function memSub() {
+    memoryValue -= parseFloat(currentValue);
+    currentValue = '0';
+    shouldResetScreen = true;
+    updateDisplay();
+}
+
+function chooseOperation(op) {
+    if (currentValue === '') return;
+    
+    if (previousValue !== '') {
+        calculate();
+    }
+    
+    operation = op;
+    previousValue = currentValue;
+    shouldResetScreen = true;
+}
+
+function calculate() {
+    if (operation === null || previousValue === '' || currentValue === '') return;
+    
+    let result;
+    const prev = parseFloat(previousValue);
+    const current = parseFloat(currentValue);
+    
+    switch (operation) {
+        case '+':
+            result = prev + current;
+            break;
+        case '-':
+            result = prev - current;
+            break;
+        case 'x':
+            result = prev * current;
+            break;
+        case 'x²':
+            result = prev * prev;
+            currentValue = prev.toString();
+            break;
+        case 'x³':
+            result = prev * prev * prev;
+            currentValue = prev.toString();
+            break;
+        case '/':
+            if (current === 0) {
+                alert('На ноль делить нельзя!');
+                clearScreen();
+                return;
+            }
+            result = prev / current;
+            break;
+        default:
+            return;
+    }
+    
+    currentValue = result.toString();
+    operation = null;
+    previousValue = '';
+    shouldResetScreen = true;
+    updateDisplay();
+}
+
+document.querySelectorAll('[id^="btn_digit_"]').forEach(button => {
+    button.addEventListener('click', () => {
+        const digit = button.textContent;
+        appendNumber(digit);
+    });
+});
+
+const digit000Button = document.getElementById('btn_digit_000');
+if (digit000Button) {
+    digit000Button.addEventListener('click', appendThreeZeros);
+}
+
+const dotButton = document.getElementById('btn_digit_dot');
+if (dotButton) {
+    dotButton.addEventListener('click', appendDot);
+}
+
+const clearButton = document.getElementById('btn_op_clear');
+if (clearButton) {
+    clearButton.addEventListener('click', clearScreen);
+}
+
+const backspaceButton = document.getElementById('btn_op_backspace');
+if (backspaceButton) {
+    backspaceButton.addEventListener('click', backspace);
+}
+
+const percentButton = document.getElementById('btn_op_percent');
+if (percentButton) {
+    percentButton.addEventListener('click', percent);
+}
+
+const sqrtButton = document.getElementById('btn_op_sqrt');
+if (sqrtButton) {
+    sqrtButton.addEventListener('click', sqrt);
+}
+
+const squareButton = document.getElementById('btn_op_square');
+if (squareButton) {
+    squareButton.addEventListener('click', square);
+}
+
+const cubeButton = document.getElementById('btn_op_cube');
+if (cubeButton) {
+    cubeButton.addEventListener('click', cube);
+}
+
+const factorialButton = document.getElementById('btn_op_factorial');
+if (factorialButton) {
+    factorialButton.addEventListener('click', factorial);
+}
+
+const memAddButton = document.getElementById('btn_op_mem_add');
+if (memAddButton) {
+    memAddButton.addEventListener('click', memAdd);
+}
+
+const memSubButton = document.getElementById('btn_op_mem_sub');
+if (memSubButton) {
+    memSubButton.addEventListener('click', memSub);
+}
+
+document.querySelectorAll('[id^="btn_op_"]:not(#btn_op_clear):not(#btn_op_backspace):not(#btn_op_percent):not(#btn_op_sqrt):not(#btn_op_square):not(#btn_op_cube):not(#btn_op_factorial):not(#btn_op_mem_add):not(#btn_op_mem_sub):not(#btn_op_equal)').forEach(button => {
+    button.addEventListener('click', () => {
+        const op = button.textContent;
+        chooseOperation(op);
+    });
+});
+
+const equalButton = document.getElementById('btn_op_equal');
+if (equalButton) {
+    equalButton.addEventListener('click', calculate);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key >= '0' && e.key <= '9') {
+        appendNumber(e.key);
+    } else if (e.key === '.') {
+        appendDot();
+    } else if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+        let op = e.key;
+        if (op === '*') op = 'x';
+        chooseOperation(op);
+    } else if (e.key === 'Enter' || e.key === '=') {
+        e.preventDefault();
+        calculate();
+    } else if (e.key === 'Escape') {
+        clearScreen();
+    } else if (e.key === '%') {
+        percent();
+    } else if (e.key === 'Backspace') {
+        e.preventDefault();
+        backspace();
+    }
+});
+
+updateDisplay();
+    </script>
+</body>
+</html>
