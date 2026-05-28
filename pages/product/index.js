@@ -27,11 +27,13 @@ export class ProductPage {
         homePage.render();
     }
 
-    getData() {
-        ajax.get(stockUrls.getStockById(this.id), (data, status) => {
-            if (status !== 200) return;
+    async getData() {
+        try {
+            const data = await ajax.get(stockUrls.getStockById(this.id));
             this.renderData(data);
-        });
+        } catch (error) {
+            console.error('Ошибка загрузки данных:', error);
+        }
     }
 
     renderData(item) {

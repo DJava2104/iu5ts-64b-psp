@@ -35,11 +35,13 @@ export class HomePage {
         productPage.render();
     }
 
-    getData() {
-        ajax.get(stockUrls.getStocks(), (data) => {
-            this.allData = data;
+    async getData() {
+        try {
+            this.allData = await ajax.get(stockUrls.getStocks());
             this.renderData();
-        });
+        } catch (error) {
+            console.error('Ошибка загрузки данных:', error);
+        }
     }
 
     renderData() {
