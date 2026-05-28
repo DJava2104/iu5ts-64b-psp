@@ -4,12 +4,19 @@
   "description": "Лабораторная работа №3: Простое веб-приложение",
   "main": "main.js",
   "scripts": {
-    "start": "npx http-server -p 8080 -c-1 .",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "start-frontend": "npx http-server -p 8080 -c-1 .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Тошниёзов Жавохирбек",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.3.0"
+    "bootstrap": "^5.3.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

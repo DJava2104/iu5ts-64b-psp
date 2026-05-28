@@ -2,6 +2,8 @@ import { BackButtonComponent } from "../../components/back-button/index.js";
 import { ProductComponent } from "../../components/product/index.js";
 import { HomePage } from "../home/index.js";
 
+const API_BASE = 'http://localhost:3000';
+
 export class ProductPage {
     constructor(parent, id) {
         this.parent = parent;
@@ -20,36 +22,12 @@ export class ProductPage {
         );
     }
 
-    getData() {
-        const allData = [
-            {
-                id: 1,
-                src: "https://cover.imglib.info/uploads/cover/jujutsu-kaisen/cover/f28e26bf-9aa3-4ad4-adb7-9b6e60a9e05d_orig.jpg",
-                title: "Магическая битва",
-                text: "Магическая битва (Jujutsu Kaisen) — популярное аниме о мире проклятий и магов. Юдзи Итадори, съев палец короля проклятий Сукуны, становится его сосудом и вступает в школу магии, чтобы сражаться с проклятиями и защищать людей. Серия славится динамичными боями, проработанной системой магии и глубокими персонажами. Это одно из самых популярных аниме современности."
-            },
-            {
-                id: 2,
-                src: "https://cover.imglib.info/uploads/cover/kimetsu-no-yaiba/cover/64b6c590-53b6-453e-9612-f2b48085e296_orig.jpg",
-                title: "Клинок, рассекающий демонов",
-                text: "Клинок, рассекающий демонов (Kimetsu no Yaiba) — популярное аниме о приключениях Тандзиро Камадо, который после трагедии в семье вступает в отряд истребителей демонов. Вместе с сестрой Нэдзуко он сражается с могущественными демонами и ищет способ вернуть ей человеческий облик. Аниме известно своей потрясающей анимацией и эмоциональными сюжетными поворотами."
-            },
-            {
-                id: 3,
-                src: "https://cover.imglib.info/uploads/cover/gachiakuta/cover/73ea918f-da28-4257-8005-0c2dc9fbe9e1_orig.jpg",
-                title: "Гачи",
-                text: "Гачи (Gachiakuta) — манга и аниме о парне по имени Рудо, который живёт в мире, разделённом на классы. После несправедливого обвинения он оказывается в опасном мире, где выживают сильнейшие. Ему предстоит раскрыть тайны своего прошлого и найти своё место в этом жестоком мире. Серия выделяется уникальным стилем рисовки и мрачной атмосферой."
-            }
-        ];
-        return allData.find(item => item.id == this.id);
-    }
-
     clickBack() {
         const homePage = new HomePage(this.parent);
         homePage.render();
     }
 
-    render() {
+    async render() {
         this.parent.innerHTML = '';
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
@@ -57,8 +35,14 @@ export class ProductPage {
         const backButton = new BackButtonComponent(this.pageRoot);
         backButton.render(this.clickBack.bind(this));
 
-        const data = this.getData();
-        const product = new ProductComponent(this.pageRoot);
-        product.render(data);
+        try {
+            const response = await fetch(`${API_BASE}/stocks/${this.id}`);
+            if (!response.ok) return;
+            const data = await response.json();
+            const product = new ProductComponent(this.pageRoot);
+            product.render(data);
+        } catch (err) {
+            console.error('Ошибка загрузки данных:', err);
+        }
     }
 }
