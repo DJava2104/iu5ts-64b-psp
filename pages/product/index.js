@@ -1,8 +1,8 @@
 import { BackButtonComponent } from "../../components/back-button/index.js";
 import { ProductComponent } from "../../components/product/index.js";
 import { HomePage } from "../home/index.js";
-
-const API_BASE = 'http://localhost:3000';
+import { ajax } from "../../modules/ajax.js";
+import { stockUrls } from "../../modules/stockUrls.js";
 
 export class ProductPage {
     constructor(parent, id) {
@@ -27,7 +27,19 @@ export class ProductPage {
         homePage.render();
     }
 
-    async render() {
+    getData() {
+        ajax.get(stockUrls.getStockById(this.id), (data, status) => {
+            if (status !== 200) return;
+            this.renderData(data);
+        });
+    }
+
+    renderData(item) {
+        const product = new ProductComponent(this.pageRoot);
+        product.render(item);
+    }
+
+    render() {
         this.parent.innerHTML = '';
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
@@ -35,14 +47,6 @@ export class ProductPage {
         const backButton = new BackButtonComponent(this.pageRoot);
         backButton.render(this.clickBack.bind(this));
 
-        try {
-            const response = await fetch(`${API_BASE}/stocks/${this.id}`);
-            if (!response.ok) return;
-            const data = await response.json();
-            const product = new ProductComponent(this.pageRoot);
-            product.render(data);
-        } catch (err) {
-            console.error('Ошибка загрузки данных:', err);
-        }
+        this.getData();
     }
 }

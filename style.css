@@ -90,6 +90,45 @@ body {
   padding: 0 20px;
 }
 
+/* ========== УПРАВЛЕНИЕ НА ГЛАВНОЙ (ФИЛЬТР + ПАГИНАЦИЯ) ========== */
+.home-controls {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.home-input {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ff9100;
+  background: #212529;
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.home-input:focus {
+  border-color: #ffaa33;
+}
+
+.home-input::placeholder {
+  color: #888;
+}
+
+.pagination-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+}
+
+.pagination-input {
+  width: 80px;
+}
+
 /* ========== КАРТОЧКИ НА ГЛАВНОЙ ========== */
 .cards-grid {
   display: grid;

@@ -1,11 +1,12 @@
 import { ProductCardComponent } from "../../components/product-card/index.js";
 import { ProductPage } from "../product/index.js";
-
-const API_BASE = 'http://localhost:3000';
+import { ajax } from "../../modules/ajax.js";
+import { stockUrls } from "../../modules/stockUrls.js";
 
 export class HomePage {
     constructor(parent) {
         this.parent = parent;
+        this.allData = [];
     }
 
     get pageRoot() {
@@ -15,6 +16,13 @@ export class HomePage {
     getHTML() {
         return (
             `
+                <div class="home-controls">
+                    <input type="text" id="filter-title" class="home-input" placeholder="Фильтр по названию..." />
+                    <div class="pagination-control">
+                        <label for="max-cards">Макс. карточек:</label>
+                        <input type="number" id="max-cards" class="home-input pagination-input" value="3" min="1" max="50" />
+                    </div>
+                </div>
                 <div id="main-page" class="cards-grid"></div>
             `
         );
@@ -27,20 +35,44 @@ export class HomePage {
         productPage.render();
     }
 
-    async render() {
+    getData() {
+        ajax.get(stockUrls.getStocks(), (data) => {
+            this.allData = data;
+            this.renderData();
+        });
+    }
+
+    renderData() {
+        this.pageRoot.innerHTML = '';
+
+        const filterValue = document.getElementById('filter-title').value.toLowerCase();
+        const maxCards = parseInt(document.getElementById('max-cards').value) || 10;
+
+        const filtered = this.allData.filter(item =>
+            item.title.toLowerCase().includes(filterValue)
+        );
+
+        const limited = filtered.slice(0, maxCards);
+
+        limited.forEach((item) => {
+            const productCard = new ProductCardComponent(this.pageRoot);
+            productCard.render(item, this.clickCard.bind(this));
+        });
+    }
+
+    render() {
         this.parent.innerHTML = '';
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
 
-        try {
-            const response = await fetch(`${API_BASE}/stocks`);
-            const data = await response.json();
-            data.forEach((item) => {
-                const productCard = new ProductCardComponent(this.pageRoot);
-                productCard.render(item, this.clickCard.bind(this));
-            });
-        } catch (err) {
-            console.error('Ошибка загрузки данных:', err);
-        }
+        document.getElementById('filter-title').addEventListener('input', () => {
+            this.renderData();
+        });
+
+        document.getElementById('max-cards').addEventListener('input', () => {
+            this.renderData();
+        });
+
+        this.getData();
     }
 }
