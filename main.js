@@ -7,6 +7,12 @@ const root = document.getElementById('root');
 function router() {
     const hash = window.location.hash || '#home';
 
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    const activeLink = document.querySelector(`.nav-link[href="${hash}"]`);
+    if (activeLink) activeLink.classList.add('active');
+
     switch(hash) {
         case '#home':
             const homePage = new HomePage(root);
