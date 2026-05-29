@@ -129,6 +129,22 @@ body {
   width: 80px;
 }
 
+.home-btn-clear {
+  padding: 10px 20px;
+  border: 1px solid #ff9100;
+  border-radius: 8px;
+  background: transparent;
+  color: #ff9100;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-btn-clear:hover {
+  background: #ff9100;
+  color: #000000;
+}
+
 /* ========== КАРТОЧКИ НА ГЛАВНОЙ ========== */
 .cards-grid {
   display: grid;

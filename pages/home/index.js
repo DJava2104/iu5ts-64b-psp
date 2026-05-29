@@ -22,6 +22,7 @@ export class HomePage {
                         <label for="max-cards">Макс. карточек:</label>
                         <input type="number" id="max-cards" class="home-input pagination-input" value="3" min="1" max="50" />
                     </div>
+                    <button id="clear-btn" class="home-btn-clear">Очистить</button>
                 </div>
                 <div id="main-page" class="cards-grid"></div>
             `
@@ -52,9 +53,9 @@ export class HomePage {
             item.title.toLowerCase().includes(filterValue)
         );
 
-        const limited = filtered.slice(0, maxCards);
+        const items = filtered.slice(0, maxCards);
 
-        limited.forEach((item) => {
+        items.forEach((item) => {
             const productCard = new ProductCardComponent(this.pageRoot);
             productCard.render(item, this.clickCard.bind(this));
         });
@@ -70,6 +71,12 @@ export class HomePage {
         });
 
         document.getElementById('max-cards').addEventListener('input', () => {
+            this.renderData();
+        });
+
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            document.getElementById('filter-title').value = '';
+            document.getElementById('max-cards').value = '3';
             this.renderData();
         });
 
