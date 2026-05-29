@@ -18,6 +18,7 @@ export class HomePage {
             `
                 <div class="home-controls">
                     <input type="text" id="filter-title" class="home-input" placeholder="Фильтр по названию..." />
+                    <button id="search-btn" class="home-btn-clear">Поиск</button>
                     <div class="pagination-control">
                         <label for="max-cards">Макс. карточек:</label>
                         <input type="number" id="max-cards" class="home-input pagination-input" value="3" min="1" max="50" />
@@ -66,7 +67,13 @@ export class HomePage {
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
 
-        document.getElementById('filter-title').addEventListener('input', () => {
+        document.getElementById('filter-title').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                this.renderData();
+            }
+        });
+
+        document.getElementById('search-btn').addEventListener('click', () => {
             this.renderData();
         });
 
